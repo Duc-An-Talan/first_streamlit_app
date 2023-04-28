@@ -66,7 +66,7 @@ if streamlit.button("Get my fruit load list"):
         
 #streamlit.dataframe(my_data_row)
 #pour eviter toute erreur de snowflake
-streamlit.stop()
+#streamlit.stop()
 
 #rajouter un fruit
 def insert_row_snowflake(new_fruit):
