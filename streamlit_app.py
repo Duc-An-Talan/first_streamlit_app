@@ -51,17 +51,18 @@ except URLError as e:
 #my_cur.execute("SELECT CURRENT_USER(), CURRENT_ACCOUNT(), CURRENT_REGION()")
 #my_data_row = my_cur.fetchone()
 
-streamlit.header("the fruit load list contains:")
+streamlit.title("View Our Fruit List - Add Your Favorite")
 #snowflake related function 
 def get_fruit_load_list():
    with my_cnx.cursor() as my_cur:
       my_cur.execute("select * from fruit_load_list")
       return my_cur.fetchall()
 # add a button
-if streamlit.button("Get my fruit load list"):
+if streamlit.button("Get fruit list"):
    my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
    my_cur = my_cnx.cursor()
    my_data_rows = get_fruit_load_list()
+   my_cnx.close()
    streamlit.dataframe(my_data_rows)
         
 #streamlit.dataframe(my_data_row)
@@ -79,6 +80,7 @@ add_my_fruit=streamlit.text_input('What fruit would you like to add?')
 if streamlit.button('Add a fruit to the list'):
       my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
       back_from_function = insert_row_snowflake(add_my_fruit)
+      my_cnx.close()
       streamlit.text(back_from_function)
    
 #ça ne va pas marcher correctement
