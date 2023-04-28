@@ -46,9 +46,6 @@ try:
       streamlit.dataframe(back_from_function)
 except URLError as e:
    streamlit.error()
-#pour eviter toute erreur de snowflake
-streamlit.stop()
-
 
 #import snowflake.connector
 #my_cur.execute("SELECT CURRENT_USER(), CURRENT_ACCOUNT(), CURRENT_REGION()")
@@ -66,9 +63,10 @@ if streamlit.button("Get my fruit load list"):
    my_cur = my_cnx.cursor()
    my_data_rows = get_fruit_load_list()
    streamlit.dataframe(my_data_rows)
-   
-      
+        
 #streamlit.dataframe(my_data_row)
+#pour eviter toute erreur de snowflake
+streamlit.stop()
 
 #rajouter un fruit
 add_my_fruit=streamlit.text_input('What fruit would you like to add?')
